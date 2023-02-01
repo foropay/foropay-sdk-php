@@ -1,0 +1,21 @@
+{
+    "name": "foropay/foropay-sdk-php",
+    "description": "ForoPay library for php",
+    "license": "MIT",
+    "type": "library",
+    "version": "1.0.0",
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "foropay\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nurbol Sarsenbayev",
+            "email": "nurbol.sarsenbayev@foropay.eu"
+        }
+    ]
+}
