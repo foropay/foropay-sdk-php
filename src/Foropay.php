@@ -3,6 +3,7 @@
 namespace Foropay;
 
 use GuzzleHttp\Client;
+use Foropay\Utils;
 
 class Foropay {
 
@@ -17,7 +18,7 @@ class Foropay {
     public function __construct(array $config = []) {
         $this->config = array_replace($this->config, $config);
         $this->httpClient = new Client([
-            'base_uri' => get_api_url($this->config['env'])
+            'base_uri' => Utils::get_api_url($this->config['env'])
         ]);
     }
 
@@ -26,7 +27,7 @@ class Foropay {
     }
 
     public function is_valid_signature($data, $signature) {
-        return is_valid_signature($this->config['private_key'], $data, $signature);
+        return Utils::is_valid_signature($this->config['private_key'], $data, $signature);
     }
 
     public function refund_transaction($transaction_id, $amount) {
