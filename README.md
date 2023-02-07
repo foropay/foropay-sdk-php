@@ -2,8 +2,8 @@
 
 ### Example
 ```php
-$foropay = new Foropay([
-    'privateKey' => ''
+$foropay = new Foropay\Foropay([
+    'private_key' => ''
 ]);
 
 $data = [
@@ -51,9 +51,5 @@ $data = [
 ]; 
 
 $response = $foropay->create_payment_session($data);
-?>
-<pre>
-    <?php var_dump($response); ?>
-</pre>
-
+var_dump($response);
 ```
