@@ -40,7 +40,7 @@ class Foropay {
         return $this->post("payments/$transaction_id/capture", $body);
     }
 
-    public function cancel_transaction($transaction_id, $amount) {
+    public function cancel_transaction($transaction_id) {
         return $this->post("payments/$transaction_id/cancel");
     }
 
