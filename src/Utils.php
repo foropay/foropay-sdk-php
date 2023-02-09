@@ -12,7 +12,7 @@ class Utils {
     }
     
     public static function is_valid_signature($private_key, $data, $signature) {
-        $body = is_string($data) ? $data : json_encode($data);
+        $body = is_string($data) ? $data : $data['id'] . $data['amount'] . $data['currency'] . $data['orderReference'] . ($data['success'] ? 'true' : 'false');
         $key = str_replace('pr_', '', $private_key);
         return hash_hmac('sha256', $str_data, $key) == $signature;
     }
