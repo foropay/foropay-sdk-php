@@ -31,12 +31,12 @@ class Foropay {
     }
 
     public function refund_transaction($transaction_id, $amount) {
-        $body = isset($amount) ? ['amount' => $amount ] : [];
+        $body = isset($amount) ? ['amount' => floatval( $amount ) ] : [];
         return $this->post("payments/$transaction_id/refund", $body);
     }
 
     public function capture_transaction($transaction_id, $amount) {
-        $body = isset($amount) ? ['amount' => $amount ] : [];
+        $body = isset($amount) ? ['amount' => floatval( $amount ) ] : [];
         return $this->post("payments/$transaction_id/capture", $body);
     }
 
@@ -44,13 +44,18 @@ class Foropay {
         return $this->post("payments/$transaction_id/cancel");
     }
 
-    private function post($url, $data) {
-        $raw_response = $this->httpClient->request('POST', $url, [
+    private function post($url, $data = null) {
+        $options = [
             'headers' => [
                 'Authorization' => $this->config['private_key']
-            ],
-            'json' => $data
-        ]);
+            ]
+        ];
+        
+        if (isset($data)) {
+            $options['json'] = $data;
+        }
+
+        $raw_response = $this->httpClient->request('POST', $url, $options);
 
         return json_decode($raw_response->getBody(), true);
     }
